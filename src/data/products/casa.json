@@ -1,0 +1,23 @@
+{
+  "id": "casa",
+  "name": "Casa",
+  "slug": "casa",
+  "category": "best-seller",
+  "type": "blend",
+  "price": 14500,
+  "unit": "250g",
+  "description": "Nuestro blend insignia. Equilibrado, dulce y fácil de preparar. Ideal para espresso y filtrados.",
+  "specs": {
+    "origin": "Colombia / Brasil",
+    "roast": "medio",
+    "process": "Lavado",
+    "altitude": "1,400 – 1,800 m",
+    "flavorNotes": ["chocolate", "caramelo", "nueces"],
+    "score": 84
+  },
+  "tags": ["espresso", "filtrado", "equilibrado"],
+  "image": "/images/productos/casa.jpg",
+  "badge": "Más vendido",
+  "inStock": true,
+  "isNew": false
+}

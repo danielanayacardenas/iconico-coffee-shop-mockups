@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RedeemablesAdmin from '../../components/admin/RedeemablesAdmin';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <RedeemablesAdmin client:only="react" />
+  </main>
+</Layout>

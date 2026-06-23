@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CheckoutApp from '../components/CheckoutApp';
+---
+
+<Layout showCart={true} showProfileSwitcher={true}>
+  <Header variant="default" />
+  <main class="pt-20">
+    <CheckoutApp client:only="react" />
+  </main>
+  <Footer variant="shop" />
+</Layout>

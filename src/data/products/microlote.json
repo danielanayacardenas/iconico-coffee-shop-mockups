@@ -1,0 +1,24 @@
+{
+  "id": "microlote",
+  "name": "Microlote EDICIÓN LIMITADA",
+  "slug": "microlote",
+  "category": "best-seller",
+  "type": "microlot",
+  "price": 28500,
+  "unit": "200g",
+  "description": "Lote único de finca seleccionada. Notas complejas y perfil de taza excepcional. Cantidades limitadas.",
+  "specs": {
+    "origin": "Etiopía, Región de Yirgacheffe",
+    "roast": "claro",
+    "process": "Lavado",
+    "altitude": "1,900 – 2,100 m",
+    "flavorNotes": ["jazmín", "limón", "miel", "té negro"],
+    "score": 88,
+    "varietal": "Heirloom"
+  },
+  "tags": ["origen único", "edición limitada", "complejo"],
+  "image": "/images/productos/microlote.jpg",
+  "badge": "Edición limitada",
+  "inStock": true,
+  "isNew": true
+}

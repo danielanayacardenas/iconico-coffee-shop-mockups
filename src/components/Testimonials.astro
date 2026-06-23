@@ -1,0 +1,49 @@
+---
+const testimonios = [
+  {
+    quote: "Nunca pensé que el café de especialidad podía ser tan simple. Icónico me enseñó que no necesito un curso de barista para disfrutar un buen café en casa.",
+    name: "Valentina R.",
+    detail: "Cliente desde 2024",
+  },
+  {
+    quote: "La suscripción mensual me cambió la mañana. Llega puntual, el café es increíble y los puntos del programa ya me dieron una cata gratis.",
+    name: "Martín G.",
+    detail: "Suscriptor mensual",
+  },
+  {
+    quote: "Como amante del café de especialidad, valoro que tengan opciones de origen único con información clara de cata. El tostado es impecable.",
+    name: "Lucía F.",
+    detail: "Coffee lover",
+  },
+];
+---
+
+<section id="testimonios" class="py-32 md:py-40 px-6 md:px-12 bg-sand/15">
+  <div class="max-w-7xl mx-auto">
+    <header class="text-center mb-20 md:mb-28">
+      <p class="text-coffee/60 text-xs md:text-sm tracking-[0.3em] uppercase mb-6 font-medium">Testimonios</p>
+      <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-charcoal leading-[1.05] tracking-[-0.02em]">
+        Lo que dicen<br /><span class="text-navy">quienes ya lo probaron</span>
+      </h2>
+      <div class="w-12 h-px bg-coffee/20 mx-auto mt-8 md:mt-10"></div>
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+      {testimonios.map((t) => (
+        <blockquote class="relative bg-cream rounded-2xl p-8 md:p-10 border border-sand/30 flex flex-col">
+          <span class="absolute top-6 left-6 md:top-8 md:left-8 font-serif text-coffee/10 text-7xl md:text-8xl leading-none pointer-events-none select-none" aria-hidden="true">&ldquo;</span>
+          <div class="flex gap-0.5 mb-5 relative">
+            {[1, 2, 3, 4, 5].map(() => (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#6B4F3A" stroke="#6B4F3A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            ))}
+          </div>
+          <p class="text-charcoal/60 text-sm leading-relaxed flex-1 mb-6 relative">"{t.quote}"</p>
+          <footer class="pt-5 border-t border-sand/30">
+            <cite class="text-charcoal font-semibold text-sm not-italic block">{t.name}</cite>
+            <span class="text-charcoal/30 text-xs tracking-wide uppercase">{t.detail}</span>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>

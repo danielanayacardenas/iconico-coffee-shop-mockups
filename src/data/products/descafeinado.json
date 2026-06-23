@@ -1,0 +1,22 @@
+{
+  "id": "descafeinado",
+  "name": "Descafeinado",
+  "slug": "descafeinado",
+  "category": "best-seller",
+  "type": "decaf",
+  "price": 16500,
+  "unit": "250g",
+  "description": "Todo el sabor, cero cafeína. Proceso de descafeinado natural que preserva el perfil de taza.",
+  "specs": {
+    "origin": "Colombia",
+    "roast": "medio",
+    "process": "Descafeinado natural (EA)",
+    "altitude": "1,500 – 1,700 m",
+    "flavorNotes": ["chocolate suave", "avellana", "pan tostado"],
+    "score": 82
+  },
+  "tags": ["descafeinado", "noche", "suave"],
+  "image": "/images/productos/descafeinado.jpg",
+  "inStock": true,
+  "isNew": true
+}

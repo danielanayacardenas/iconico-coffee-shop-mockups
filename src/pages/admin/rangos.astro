@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RanksAdmin from '../../components/admin/RanksAdmin';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <RanksAdmin client:only="react" />
+  </main>
+</Layout>

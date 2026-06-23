@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import OrdersApp from '../../components/cuenta/OrdersApp';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <OrdersApp client:only="react" />
+  </main>
+</Layout>

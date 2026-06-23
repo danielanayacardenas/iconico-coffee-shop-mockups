@@ -1,0 +1,23 @@
+{
+  "id": "suscripcion",
+  "name": "Suscripción mensual",
+  "slug": "suscripcion-mensual",
+  "category": "subscription",
+  "type": "blend",
+  "price": 12800,
+  "subscriptionPrice": 12800,
+  "unit": "250g / mes",
+  "description": "Recibe Casa todos los meses, sin pensar. Cancela cuando quieras. Envío gratis incluido.",
+  "specs": {
+    "origin": "Colombia / Brasil",
+    "roast": "medio",
+    "process": "Lavado",
+    "altitude": "1,400 – 1,800 m",
+    "flavorNotes": ["chocolate", "caramelo", "nueces"]
+  },
+  "tags": ["suscripción", "ahorro", "cómodo"],
+  "image": "/images/productos/suscripcion.jpg",
+  "badge": "Ahorra 12%",
+  "inStock": true,
+  "isNew": false
+}

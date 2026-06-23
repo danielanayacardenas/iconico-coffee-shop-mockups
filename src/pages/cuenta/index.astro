@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DashboardApp from '../../components/cuenta/DashboardApp';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <DashboardApp client:only="react" />
+  </main>
+</Layout>

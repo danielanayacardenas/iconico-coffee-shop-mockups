@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import ShopApp from '../components/shop/ShopApp';
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('products')).map((entry) => ({
+  id: entry.data.id,
+  name: entry.data.name,
+  slug: entry.data.slug,
+  category: entry.data.category,
+  type: entry.data.type,
+  price: entry.data.price,
+  subscriptionPrice: entry.data.subscriptionPrice,
+  unit: entry.data.unit,
+  description: entry.data.description,
+  specs: entry.data.specs,
+  tags: entry.data.tags,
+  image: entry.data.image,
+  badge: entry.data.badge,
+  inStock: entry.data.inStock,
+  isNew: entry.data.isNew,
+}));
+---
+
+<Layout showCart={true}>
+  <main>
+    <ShopApp products={products} client:load />
+  </main>
+  <Footer variant="shop" />
+</Layout>

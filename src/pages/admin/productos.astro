@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductsAdmin from '../../components/admin/ProductsAdmin';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <ProductsAdmin client:only="react" />
+  </main>
+</Layout>

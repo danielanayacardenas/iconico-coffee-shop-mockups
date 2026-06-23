@@ -1,0 +1,22 @@
+{
+  "id": "pack-casa",
+  "name": "Pack inicio",
+  "slug": "pack-inicio",
+  "category": "pack",
+  "type": "blend",
+  "price": 38900,
+  "unit": "Casa 250g + V60",
+  "description": "Casa + un método de preparación V60. El regalo perfecto para quien quiere empezar en el café de especialidad.",
+  "specs": {
+    "origin": "Colombia / Brasil",
+    "roast": "medio",
+    "process": "Lavado",
+    "altitude": "1,400 – 1,800 m",
+    "flavorNotes": ["chocolate", "caramelo", "nueces"]
+  },
+  "tags": ["pack", "regalo", "principiante", "V60"],
+  "image": "/images/productos/pack-casa.jpg",
+  "badge": "Recomendado",
+  "inStock": true,
+  "isNew": false
+}

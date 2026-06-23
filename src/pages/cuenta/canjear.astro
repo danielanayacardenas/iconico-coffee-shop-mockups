@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RedeemApp from '../../components/cuenta/RedeemApp';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <RedeemApp client:only="react" />
+  </main>
+</Layout>

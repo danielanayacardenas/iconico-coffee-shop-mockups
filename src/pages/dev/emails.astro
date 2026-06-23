@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EmailGallery from '../../components/dev/EmailGallery';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <EmailGallery client:only="react" />
+  </main>
+</Layout>

@@ -1,0 +1,64 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import CartDrawer from '../components/shop/CartDrawer';
+import ProfileSwitcher from '../components/ProfileSwitcher';
+import '../styles/global.css';
+
+interface Props {
+  showCart?: boolean;
+  showProfileSwitcher?: boolean;
+}
+
+const { showCart = false, showProfileSwitcher = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" transition:animate="none">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>Icónico — Specialty Coffee, Made Simple</title>
+    <meta name="description" content="Café de especialidad sin complicaciones. Descubre granos seleccionados, suscripciones y un programa de recompensas pensado para ti." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+    {showCart && <CartDrawer client:load />}
+    {showProfileSwitcher && <ProfileSwitcher client:load />}
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+    background-color: #F3EEE6;
+    color: #1F1F1D;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'desktop' | 'mobile';
+}
+
+const { href, label, variant = 'desktop' } = Astro.props;
+---
+
+{variant === 'desktop' ? (
+  <a
+    href={href}
+    class="nav-ripple relative inline-block overflow-hidden cursor-pointer text-xs text-charcoal/50 hover:text-cream transition-colors duration-300 tracking-[0.2em] uppercase font-medium px-4 py-2 rounded-full"
+    data-ripple
+  >
+    <span
+      class="ripple-fill absolute rounded-full pointer-events-none"
+      style="background-color: #1F3829;"
+    ></span>
+    <span class="relative z-10">{label}</span>
+  </a>
+) : (
+  <a
+    href={href}
+    class="nav-ripple-mobile relative block cursor-pointer text-sm text-charcoal/70 hover:text-cream transition-colors duration-200 tracking-[0.2em] uppercase font-medium py-3.5 px-4 rounded-xl overflow-hidden"
+    data-ripple-mobile
+  >
+    <span
+      class="ripple-fill absolute rounded-2xl pointer-events-none"
+      style="background-color: #1F3829; opacity: 0;"
+    ></span>
+    <span class="relative z-10">{label}</span>
+  </a>
+)}

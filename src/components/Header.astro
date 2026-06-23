@@ -1,0 +1,202 @@
+---
+import CartIcon from './shop/CartIcon';
+import NavLink from './NavLink.astro';
+
+interface Props {
+  variant?: 'landing' | 'default';
+}
+
+const { variant = 'default' } = Astro.props;
+const currentPath = Astro.url.pathname;
+const isAccountArea = currentPath.startsWith('/cuenta') || currentPath.startsWith('/admin') || currentPath.startsWith('/dev') || currentPath.startsWith('/auth');
+
+const navLinks = isAccountArea
+  ? [
+      { href: '/tienda', label: 'Tienda' },
+      { href: '/cuenta', label: 'Mi cuenta' },
+      { href: '/dev/emails', label: 'Emails' },
+    ]
+  : [
+      { href: '/tienda', label: 'Tienda' },
+      { href: '/#productos', label: 'Productos' },
+      { href: '/#testimonios', label: 'Testimonios' },
+      { href: '/#contacto', label: 'Contacto' },
+    ];
+---
+
+<header id="header" class="fixed top-0 left-0 right-0 z-50">
+  <nav class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
+    <a href="/" class="text-charcoal font-serif text-xl md:text-2xl font-bold tracking-[-0.03em] hover:text-coffee transition-colors duration-200">
+      icónico
+    </a>
+
+    <ul class="hidden md:flex items-center gap-2">
+      {navLinks.map((link) => (
+        <li>
+          <NavLink href={link.href} label={link.label} variant="desktop" />
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-4">
+      {variant === 'default' && <CartIcon client:load />}
+      <button
+        id="menu-toggle"
+        class="md:hidden relative w-10 h-10 flex items-center justify-center cursor-pointer rounded-full hover:bg-sand/30 transition-colors duration-200"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="menu-bar menu-bar-top absolute w-5 h-px bg-charcoal transition-all duration-300 ease-out"></span>
+        <span class="menu-bar menu-bar-bottom absolute w-5 h-px bg-charcoal transition-all duration-300 ease-out"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden absolute top-full left-0 right-0 bg-cream border-t border-sand/40 shadow-lg overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-out"
+    data-open="false"
+  >
+    <ul class="px-6 py-4 flex flex-col gap-1">
+      {navLinks.map((link) => (
+        <li>
+          <NavLink href={link.href} label={link.label} variant="mobile" />
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  function attachRipple(link: HTMLElement) {
+    const fill = link.querySelector<HTMLElement>('.ripple-fill');
+    if (!fill) return;
+
+    let activeRipple: HTMLElement | null = null;
+
+    link.addEventListener('mouseenter', (e) => {
+      const rect = link.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const size = Math.max(rect.width, rect.height) * 2.4;
+
+      fill.style.transition = 'none';
+      fill.style.width = `${size}px`;
+      fill.style.height = `${size}px`;
+      fill.style.left = `${x - size / 2}px`;
+      fill.style.top = `${y - size / 2}px`;
+      fill.style.transform = 'scale(0)';
+      fill.style.opacity = '0.95';
+
+      requestAnimationFrame(() => {
+        fill.style.transition = 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease-out';
+        fill.style.transform = 'scale(1)';
+      });
+
+      activeRipple = fill;
+      link.style.color = '#F3EEE6';
+    });
+
+    link.addEventListener('mousemove', (e) => {
+      if (!activeRipple) return;
+      const rect = link.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const size = activeRipple.offsetWidth;
+      activeRipple.style.left = `${x - size / 2}px`;
+      activeRipple.style.top = `${y - size / 2}px`;
+    });
+
+    link.addEventListener('mouseleave', () => {
+      if (!activeRipple) return;
+      const r = activeRipple;
+      activeRipple = null;
+      r.style.transition = 'transform 350ms cubic-bezier(0.4, 0, 0.2, 1), opacity 350ms ease-in';
+      r.style.transform = 'scale(0)';
+      r.style.opacity = '0';
+      link.style.color = '';
+      setTimeout(() => {
+        r.style.transition = 'none';
+      }, 350);
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-ripple]').forEach(attachRipple);
+
+  function attachRippleMobile(link: HTMLElement) {
+    const fill = link.querySelector<HTMLElement>('.ripple-fill');
+    if (!fill) return;
+    link.addEventListener('mouseenter', () => {
+      fill.style.transition = 'opacity 250ms ease-out';
+      fill.style.opacity = '1';
+    });
+    link.addEventListener('mouseleave', () => {
+      fill.style.transition = 'opacity 200ms ease-in';
+      fill.style.opacity = '0';
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-ripple-mobile]').forEach(attachRippleMobile);
+
+  const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+  const menu = document.getElementById('mobile-menu');
+  const top = document.querySelector<HTMLElement>('.menu-bar-top');
+  const bottom = document.querySelector<HTMLElement>('.menu-bar-bottom');
+
+  function setMenu(open: boolean) {
+    if (!menu || !toggle) return;
+    menu.dataset.open = String(open);
+    menu.style.maxHeight = open ? `${menu.scrollHeight}px` : '0px';
+    menu.style.opacity = open ? '1' : '0';
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    if (top && bottom) {
+      if (open) {
+        top.style.transform = 'translateY(0) rotate(45deg)';
+        bottom.style.transform = 'translateY(0) rotate(-45deg)';
+      } else {
+        top.style.transform = '';
+        bottom.style.transform = '';
+      }
+    }
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.dataset.open === 'true';
+    setMenu(!isOpen);
+  });
+
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.dataset.open === 'true') {
+      setMenu(false);
+    }
+  });
+
+  const header = document.getElementById('header');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > 20) {
+          header?.classList.add('bg-cream/90', 'backdrop-blur-md', 'shadow-[0_1px_0_#E4D8C8]');
+        } else {
+          header?.classList.remove('bg-cream/90', 'backdrop-blur-md', 'shadow-[0_1px_0_#E4D8C8]');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768 && menu?.dataset.open === 'true') {
+      setMenu(false);
+    }
+  });
+</script>

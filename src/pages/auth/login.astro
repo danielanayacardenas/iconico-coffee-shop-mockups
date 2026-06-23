@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LoginApp from '../../components/LoginApp';
+---
+
+<Layout showProfileSwitcher={true}>
+  <main>
+    <LoginApp client:only="react" />
+  </main>
+</Layout>

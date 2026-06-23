@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F3EEE6;
+  --color-sand: #E4D8C8;
+  --color-charcoal: #1F1F1D;
+  --color-navy: #1F3829;
+  --color-coffee: #4A3525;
+  --color-sage: #6B5E4A;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer base {
+  ::selection {
+    background-color: #4A3525;
+    color: #F3EEE6;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1F3829;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+}
+
+/* ============================================
+   Shop Theme — Modo Experto inversion
+   ============================================ */
+
+.shop-root {
+  --shop-page-bg: #F3EEE6;
+  transition: background-color 1000ms ease;
+}
+
+.shop-root[data-mode="experto"] {
+  --shop-page-bg: #1F3829;
+}
+
+.shop-root,
+.shop-root * {
+  transition: background-color 1000ms ease, color 1000ms ease, border-color 1000ms ease, fill 1000ms ease, stroke 1000ms ease;
+}
+
+@keyframes shop-mode-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.shop-mode-anim {
+  animation: shop-mode-fade-in 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Explorador → Experto overrides --- */
+.shop-root[data-mode="experto"] {
+  background-color: #1F3829;
+}
+
+/* Backgrounds */
+.shop-root[data-mode="experto"] .bg-cream {
+  background-color: #2a4a37 !important;
+}
+.shop-root[data-mode="experto"] .bg-cream\/90 {
+  background-color: rgba(31, 56, 41, 0.92) !important;
+}
+.shop-root[data-mode="experto"] .bg-sand\/30 {
+  background-color: rgba(240, 234, 224, 0.08) !important;
+}
+.shop-root[data-mode="experto"] .bg-sand\/50 {
+  background-color: rgba(240, 234, 224, 0.14) !important;
+}
+.shop-root[data-mode="experto"] .bg-sand\/20 {
+  background-color: rgba(240, 234, 224, 0.06) !important;
+}
+.shop-root[data-mode="experto"] .bg-sand\/40 {
+  background-color: rgba(240, 234, 224, 0.1) !important;
+}
+.shop-root[data-mode="experto"] .bg-coffee\/5 {
+  background-color: rgba(196, 186, 168, 0.06) !important;
+}
+.shop-root[data-mode="experto"] .bg-coffee\/10 {
+  background-color: rgba(196, 186, 168, 0.12) !important;
+}
+.shop-root[data-mode="experto"] .bg-coffee\/\[0\.06\] {
+  background-color: rgba(196, 186, 168, 0.08) !important;
+}
+.shop-root[data-mode="experto"] .bg-sage\/\[0\.06\] {
+  background-color: rgba(196, 186, 168, 0.1) !important;
+}
+.shop-root[data-mode="experto"] .bg-sage\/\[0\.10\] {
+  background-color: rgba(196, 186, 168, 0.16) !important;
+}
+.shop-root[data-mode="experto"] .bg-navy\/\[0\.06\] {
+  background-color: rgba(240, 234, 224, 0.08) !important;
+}
+.shop-root[data-mode="experto"] .bg-navy\/10 {
+  background-color: rgba(240, 234, 224, 0.12) !important;
+}
+
+/* Primary text */
+.shop-root[data-mode="experto"] .text-charcoal {
+  color: #F0EAE0 !important;
+}
+.shop-root[data-mode="experto"] .text-charcoal\/30 {
+  color: rgba(240, 234, 224, 0.3) !important;
+}
+.shop-root[data-mode="experto"] .text-charcoal\/40 {
+  color: rgba(240, 234, 224, 0.4) !important;
+}
+.shop-root[data-mode="experto"] .text-charcoal\/50 {
+  color: rgba(240, 234, 224, 0.55) !important;
+}
+.shop-root[data-mode="experto"] .text-charcoal\/60 {
+  color: rgba(240, 234, 224, 0.65) !important;
+}
+
+/* Navy text/icons (standalone) → cream */
+.shop-root[data-mode="experto"] .text-navy {
+  color: #F0EAE0 !important;
+}
+.shop-root[data-mode="experto"] .text-navy\/40 {
+  color: rgba(240, 234, 224, 0.4) !important;
+}
+.shop-root[data-mode="experto"] .text-navy\/50 {
+  color: rgba(240, 234, 224, 0.5) !important;
+}
+.shop-root[data-mode="experto"] .text-navy\/60 {
+  color: rgba(240, 234, 224, 0.6) !important;
+}
+.shop-root[data-mode="experto"] .text-navy\/70 {
+  color: rgba(240, 234, 224, 0.7) !important;
+}
+
+/* Accents: sage / coffee — lighten for dark bg */
+.shop-root[data-mode="experto"] .text-sage\/60 {
+  color: rgba(212, 200, 178, 0.7) !important;
+}
+.shop-root[data-mode="experto"] .text-sage\/70 {
+  color: rgba(212, 200, 178, 0.8) !important;
+}
+.shop-root[data-mode="experto"] .text-sage {
+  color: #D4C8B2 !important;
+}
+.shop-root[data-mode="experto"] .text-coffee\/50 {
+  color: rgba(212, 200, 178, 0.6) !important;
+}
+.shop-root[data-mode="experto"] .text-coffee {
+  color: #D4C8B2 !important;
+}
+
+/* Borders */
+.shop-root[data-mode="experto"] .border-sand\/30 {
+  border-color: rgba(240, 234, 224, 0.12) !important;
+}
+.shop-root[data-mode="experto"] .border-navy\/10 {
+  border-color: rgba(240, 234, 224, 0.1) !important;
+}
+.shop-root[data-mode="experto"] .border-navy\/20 {
+  border-color: rgba(240, 234, 224, 0.18) !important;
+}
+.shop-root[data-mode="experto"] .border-navy\/30 {
+  border-color: rgba(240, 234, 224, 0.25) !important;
+}
+.shop-root[data-mode="experto"] .border-navy\/40 {
+  border-color: rgba(240, 234, 224, 0.32) !important;
+}
+.shop-root[data-mode="experto"] .border-cream\/20 {
+  border-color: rgba(240, 234, 224, 0.18) !important;
+}
+
+/* Hover borders */
+.shop-root[data-mode="experto"] .hover\:border-navy\/40:hover {
+  border-color: rgba(240, 234, 224, 0.4) !important;
+}
+.shop-root[data-mode="experto"] .hover\:bg-sand\/50:hover {
+  background-color: rgba(240, 234, 224, 0.16) !important;
+}
+.shop-root[data-mode="experto"] .hover\:text-charcoal\/70:hover {
+  color: rgba(240, 234, 224, 0.8) !important;
+}
+.shop-root[data-mode="experto"] .hover\:text-navy:hover {
+  color: #F0EAE0 !important;
+}
+.shop-root[data-mode="experto"] .hover\:text-coffee:hover {
+  color: #D4C8B2 !important;
+}
+
+/* Inverted buttons (Agregar, badge, final check icon) */
+.shop-root[data-mode="experto"] .bg-navy.text-cream,
+.shop-root[data-mode="experto"] .text-cream.bg-navy {
+  background-color: #F0EAE0 !important;
+  color: #1F3829 !important;
+}
+
+/* Keep navy as accent for specific elements (active filter chip, active nav underline) */
+.shop-root[data-mode="experto"] .bg-navy {
+  background-color: #F0EAE0 !important;
+}
+.shop-root[data-mode="experto"] .text-cream {
+  color: #1F3829 !important;
+}
+
+/* Active filter chip stays distinct */
+.shop-root[data-mode="experto"] .bg-navy {
+  background-color: #F0EAE0 !important;
+}
+
+/* Underline accent (nav active) */
+.shop-root[data-mode="experto"] .bg-navy.rounded-full,
+.shop-root[data-mode="experto"] span.bg-navy.rounded-full {
+  background-color: #F0EAE0 !important;
+}
+
+/* Stroke for inline SVGs that use stroke="#4A3525" (coffee) */
+.shop-root[data-mode="experto"] svg[stroke="#4A3525"] {
+  stroke: #C4BAA8 !important;
+}
+
+/* Sand/60 separator pipes */
+.shop-root[data-mode="experto"] .text-sand\/60 {
+  color: rgba(240, 234, 224, 0.25) !important;
+}
+
+/* Ring outline in dark mode */
+.shop-root[data-mode="experto"] :focus-visible {
+  outline-color: #F0EAE0;
+}
+
+/* ============================================
+   Shop Header — full inversion in experto
+   (mirrors the footer treatment: solid light bar)
+   ============================================ */
+
+.shop-root[data-mode="experto"] > header.bg-cream\/90 {
+  background-color: #F3EEE6 !important;
+  border-bottom-color: #E4D8C8 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.shop-root[data-mode="experto"] > header .text-charcoal {
+  color: #1F1F1D !important;
+}
+.shop-root[data-mode="experto"] > header .text-charcoal\/40 {
+  color: rgba(31, 31, 29, 0.45) !important;
+}
+.shop-root[data-mode="experto"] > header .text-navy {
+  color: #1F3829 !important;
+}
+.shop-root[data-mode="experto"] > header .text-navy\/50 {
+  color: rgba(31, 56, 41, 0.55) !important;
+}
+.shop-root[data-mode="experto"] > header .text-navy\/40 {
+  color: rgba(31, 56, 41, 0.45) !important;
+}
+.shop-root[data-mode="experto"] > header .text-navy\/60 {
+  color: rgba(31, 56, 41, 0.6) !important;
+}
+.shop-root[data-mode="experto"] > header .text-navy\/70 {
+  color: rgba(31, 56, 41, 0.7) !important;
+}
+.shop-root[data-mode="experto"] > header .text-coffee {
+  color: #4A3525 !important;
+}
+.shop-root[data-mode="experto"] > header .border-navy\/20,
+.shop-root[data-mode="experto"] > header .border-navy\/30 {
+  border-color: rgba(31, 56, 41, 0.2) !important;
+}
+.shop-root[data-mode="experto"] > header .border-navy\/40 {
+  border-color: rgba(31, 56, 41, 0.4) !important;
+}
+.shop-root[data-mode="experto"] > header .bg-navy {
+  background-color: #1F3829 !important;
+}
+.shop-root[data-mode="experto"] > header .text-cream {
+  color: #F3EEE6 !important;
+}
+.shop-root[data-mode="experto"] > header .hover\:border-navy\/40:hover {
+  border-color: rgba(31, 56, 41, 0.5) !important;
+}
+.shop-root[data-mode="experto"] > header .hover\:text-navy:hover {
+  color: #1F3829 !important;
+}
+.shop-root[data-mode="experto"] > header .hover\:text-coffee:hover {
+  color: #4A3525 !important;
+}
+
+/* Shop nav gets a distinct dark surface in experto mode */
+.shop-root[data-mode="experto"] > nav {
+  background-color: #1F3829 !important;
+}
+
+/* ============================================
+   Global inversion outside shop-root (Footer)
+   Controlled by data-shop-mode on <html>
+   ============================================ */
+
+html[data-shop-mode="experto"] {
+  background-color: #1F3829;
+}
+
+html[data-shop-mode="experto"] footer {
+  background-color: #F3EEE6 !important;
+  color: #1F1F1D !important;
+}
+
+html[data-shop-mode="experto"] footer .text-cream {
+  color: #1F1F1D !important;
+}
+html[data-shop-mode="experto"] footer .text-cream\/60 {
+  color: rgba(31, 31, 29, 0.6) !important;
+}
+html[data-shop-mode="experto"] footer .text-cream\/40 {
+  color: rgba(31, 31, 29, 0.5) !important;
+}
+html[data-shop-mode="experto"] footer .text-cream\/30 {
+  color: rgba(31, 31, 29, 0.45) !important;
+}
+html[data-shop-mode="experto"] footer .text-cream\/20 {
+  color: rgba(31, 31, 29, 0.35) !important;
+}
+html[data-shop-mode="experto"] footer .border-cream\/20 {
+  border-color: rgba(31, 56, 41, 0.15) !important;
+}
+html[data-shop-mode="experto"] footer a:hover {
+  color: #1F3829 !important;
+}
+html[data-shop-mode="experto"] footer svg {
+  color: rgba(31, 31, 29, 0.45);
+}
