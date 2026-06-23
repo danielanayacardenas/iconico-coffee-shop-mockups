@@ -2,9 +2,9 @@
 
 > Specialty Coffee, Made Simple.
 
-Icónico es una tienda online para una marca de café de especialidad mexicana. Vende café, gestiona suscripciones mensuales, y tiene un programa de lealtad de 10 niveles llamado **"El programa Icónico"** con sistema dual de puntos (rango + cashback canjeable).
+Icónico es una tienda en línea para una marca de café de especialidad mexicana. Vende café, gestiona suscripciones mensuales, y tiene un programa de lealtad de 10 niveles llamado **"El programa Icónico"** con sistema dual de puntos (rango + cashback canjeable).
 
-Esta versión del proyecto está en **modo mockup completo**: todas las pantallas de las 17 historias de usuario están implementadas en frontend puro, con datos simulados en `localStorage`. No hay backend, no hay Supabase, no hay Stripe. Sirve para validar UX antes de invertir en implementación real.
+Esta versión del proyecto está en **modo mockup completo**: todas las pantallas de las 17 historias de usuario están implementadas en frontend puro, con datos simulados en `localStorage`. No hay backend, no hay Supabase, no hay Stripe. Sirve para validar la experiencia de uso antes de invertir en la implementación real.
 
 ---
 
@@ -42,37 +42,37 @@ Esta versión del proyecto está en **modo mockup completo**: todas las pantalla
 | `@astrojs/react` | 5.0.7 | Integración de React en Astro. |
 | `react` | 19.2.7 | Runtime de los React islands interactivos. |
 | `react-dom` | 19.2.7 | DOM renderer. |
-| `tailwindcss` | 4.3.1 | Utility-first CSS. v4 cambia el approach: `@theme` en CSS, no más `tailwind.config.js`. |
+| `tailwindcss` | 4.3.1 | CSS de utilidades. v4 cambia el enfoque: `@theme` en CSS, ya no hay `tailwind.config.js`. |
 | `@tailwindcss/vite` | 4.3.1 | Plugin de Vite que procesa Tailwind. |
-| `nanostores` | 1.3.0 | State management atómico (286 bytes, tree-shakable). |
+| `nanostores` | 1.3.0 | Gestión de estado atómica (286 bytes, tree-shakable). |
 | `@nanostores/react` | 1.1.0 | Hook `useStore()` para React. |
-| `@types/react` | 19.2.17 | Types de React. |
-| `@types/react-dom` | 19.2.3 | Types de ReactDOM. |
+| `@types/react` | 19.2.17 | Tipos de React. |
+| `@types/react-dom` | 19.2.3 | Tipos de ReactDOM. |
 
 ### Por qué este stack
 
-- **Astro + React islands**: páginas estáticas por default (cero JS), React solo donde hay interactividad. Mejor performance que SPA pura.
-- **nanostores** en vez de Redux/Zustand: 286 bytes, no necesita Provider, tree-shakeable, compartido entre islands via `localStorage`.
-- **Tailwind v4**: setup más simple que v3, sin `tailwind.config.js`, todo via `@theme` en CSS.
-- **Bun** en vez de npm/node: 3-5x más rápido en install + scripts, drop-in replacement.
+- **Astro + React islands**: páginas estáticas por defecto (cero JS), React solo donde hay interactividad. Mejor rendimiento que una SPA pura.
+- **nanostores** en lugar de Redux/Zustand: 286 bytes, no necesita Provider, tree-shakeable, compartido entre islands mediante `localStorage`.
+- **Tailwind v4**: configuración más simple que v3, sin `tailwind.config.js`, todo mediante `@theme` en CSS.
+- **Bun** en lugar de npm/node: 3-5x más rápido en instalación y scripts, drop-in replacement.
 
 ---
 
 ## Setup
 
 ```bash
-# 1. Clonar / descargar el proyecto
+# 1. Clonar o descargar el proyecto
 cd IconicoCafe2
 
 # 2. Instalar dependencias (usa bun, NO npm)
 bun install
 
-# 3. Levantar el dev server
+# 3. Iniciar el servidor de desarrollo
 bun run dev
 # → abre http://localhost:4321
 ```
 
-**Importante:** todo se corre con `bun`, nunca con `npm` ni `node`. El proyecto está configurado para Bun.
+**Importante:** todo se ejecuta con `bun`, nunca con `npm` ni `node`. El proyecto está configurado para Bun.
 
 ---
 
@@ -80,10 +80,10 @@ bun run dev
 
 | Comando | Qué hace |
 |---|---|
-| `bun run dev` | Inicia el dev server en `http://localhost:4321` con HMR. |
+| `bun run dev` | Inicia el servidor de desarrollo en `http://localhost:4321` con HMR. |
 | `bun run build` | Compila el sitio a `./dist/` (12 páginas estáticas). |
 | `bun run preview` | Sirve el build de producción localmente para verificar. |
-| `bunx astro check` | Type-check de todo el proyecto. |
+| `bunx astro check` | Verifica tipos de todo el proyecto. |
 
 ---
 
@@ -105,7 +105,7 @@ IconicoCafe2/
 │   │
 │   ├── components/                ← Componentes (Astro .astro + React .tsx)
 │   │   ├── admin/                 ← /admin/* (mock CRUD)
-│   │   │   ├── AccessGate.tsx     ← Bloquea si no sos admin
+│   │   │   ├── AccessGate.tsx     ← Bloquea si no eres admin
 │   │   │   ├── ProductsAdmin.tsx  ← HU-5
 │   │   │   ├── RanksAdmin.tsx     ← HU-6
 │   │   │   └── RedeemablesAdmin.tsx ← HU-17
@@ -200,51 +200,51 @@ IconicoCafe2/
 
 ### Públicas
 
-| URL | Qué ves | HUs |
+| URL | Qué se muestra | HUs |
 |---|---|---|
-| `/` | Landing con hero, productos, testimonios, contacto. | — |
+| `/` | Landing con hero, productos, testimonios y contacto. | — |
 | `/tienda` | Tienda con modo Explorador (cards) / Experto (lista). | — |
-| `/checkout` | Checkout guest con cálculo de envío por CP. | HU-1, HU-16 |
-| `/auth/login` | Login con magic link + Google OAuth. | HU-2, HU-9 |
+| `/checkout` | Checkout como invitado con cálculo de envío por CP. | HU-1, HU-16 |
+| `/auth/login` | Inicio de sesión con magic link y Google OAuth. | HU-2, HU-9 |
 
-### Área de cuenta (requiere perfil logueado)
+### Área de cuenta (requiere perfil con sesión iniciada)
 
-| URL | Qué ves | HUs |
+| URL | Qué se muestra | HUs |
 |---|---|---|
-| `/cuenta` | Dashboard con rango, puntos, suscripción. | HU-3, HU-4, HU-7 |
+| `/cuenta` | Panel con rango, puntos y suscripción. | HU-3, HU-4, HU-7 |
 | `/cuenta/pedidos` | Historial con filtros. | HU-8 |
-| `/cuenta/perfil` | Editar datos + dirección. | HU-10 |
-| `/cuenta/canjear` | Catálogo canjeable + modal. | HU-13 |
+| `/cuenta/perfil` | Editar datos y dirección. | HU-10 |
+| `/cuenta/canjear` | Catálogo canjeable con modal. | HU-13 |
 
-### Admin (requiere perfil admin)
+### Admin (requiere perfil de administrador)
 
-| URL | Qué ves | HUs |
+| URL | Qué se muestra | HUs |
 |---|---|---|
 | `/admin/productos` | CRUD del catálogo normal. | HU-5 |
 | `/admin/rangos` | Editor de los 10 rangos. | HU-6 |
 | `/admin/canjeables` | CRUD de productos canjeables. | HU-17 |
 
-### Dev (herramientas de preview)
+### Dev (herramientas de previsualización)
 
-| URL | Qué ves | HUs |
+| URL | Qué se muestra | HUs |
 |---|---|---|
-| `/dev/emails` | Galería de los 11 emails transaccionales. | HU-11, HU-12, HU-15 + 8 más |
+| `/dev/emails` | Galería de los 11 correos transaccionales. | HU-11, HU-12, HU-15 + 8 más |
 
 ---
 
 ## Cómo funciona el modo mock
 
-Todas las páginas autenticadas (cuenta, admin) y la tienda tienen un **switcher flotante** en la esquina superior derecha que te deja alternar entre 3 perfiles precargados:
+Todas las páginas autenticadas (cuenta, admin) y la tienda tienen un **selector flotante** en la esquina superior derecha que te permite alternar entre 3 perfiles precargados:
 
 | Perfil | Datos |
 |---|---|
-| **Visitante** | Sin cuenta, sin puntos. Para probar flujos de guest. |
-| **María (Catador)** | 1,200 pts rango, 850 pts canjeables, suscripción activa, 3 pedidos. |
-| **Diego (Icónico · admin)** | 25,000 pts rango, 2,400 pts canjeables, 12 pedidos, **es admin** (puede entrar a /admin). |
+| **Visitante** | Sin cuenta, sin puntos. Para probar flujos de invitado. |
+| **María (Catador)** | 1,200 pts de rango, 850 pts canjeables, suscripción activa, 3 pedidos. |
+| **Diego (Icónico · admin)** | 25,000 pts de rango, 2,400 pts canjeables, 12 pedidos, **es admin** (puede entrar a /admin). |
 
-El switcher persiste el perfil elegido en `localStorage` con la key `iconico-mock-profile`.
+El selector persiste el perfil elegido en `localStorage` con la clave `iconico-mock-profile`.
 
-### Qué se persiste vs qué no
+### Qué se persiste y qué no
 
 | Dato | Persiste | Dónde |
 |---|---|---|
@@ -253,20 +253,20 @@ El switcher persiste el perfil elegido en `localStorage` con la key `iconico-moc
 | Cambios en el perfil mock (canjes, suscripción pausada) | No (vive solo en memoria) | Al recargar vuelve al estado original del mock |
 | Filtros de la tienda | No (al volver a entrar) | `src/components/shop/store/filters.ts` |
 
-### Cómo navegar la app
+### Cómo navegar la aplicación
 
-1. Abrí `/` (landing).
-2. Hacé click en "Tienda" → `/tienda`. Probá modo Explorador / Experto.
-3. Agregá productos al carrito. Abrí el carrito con el ícono de bolsa.
-4. Andá a "Finalizar compra" → `/checkout`. Probá meter un CP de 5 dígitos para ver el cálculo de envío en vivo (HU-16).
-5. Volvé a `/auth/login` para ver el flow de magic link.
-6. Cambiá a "María (Catador)" con el switcher arriba a la derecha.
-7. Andá a `/cuenta` → ves el dashboard con su rango, puntos, suscripción.
-8. Probá `/cuenta/canjear` y canjeá un producto.
-9. Cambiá a "Diego (Icónico · admin)" con el switcher.
-10. Andá a `/admin/productos` → ves el CRUD completo.
-11. Andá a `/admin/rangos` → ves los 10 rangos editables.
-12. Andá a `/dev/emails` → ves los 11 emails transaccionales con datos de Diego.
+1. Abre `/` (landing).
+2. Haz clic en "Tienda" → `/tienda`. Prueba el modo Explorador / Experto.
+3. Agrega productos al carrito. Abre el carrito con el ícono de bolsa.
+4. Ve a "Finalizar compra" → `/checkout`. Captura un CP de 5 dígitos para ver el cálculo de envío en vivo (HU-16).
+5. Regresa a `/auth/login` para ver el flujo de magic link.
+6. Cambia a "María (Catador)" con el selector de la esquina superior derecha.
+7. Ve a `/cuenta` → verás el panel con su rango, puntos y suscripción.
+8. Prueba `/cuenta/canjear` y canjea un producto.
+9. Cambia a "Diego (Icónico · admin)" con el selector.
+10. Ve a `/admin/productos` → verás el CRUD completo.
+11. Ve a `/admin/rangos` → verás los 10 rangos editables.
+12. Ve a `/dev/emails` → verás los 11 correos transaccionales con datos de Diego.
 
 ---
 
@@ -294,26 +294,26 @@ Definidos en `src/styles/global.css` con `@theme` (Tailwind v4 syntax).
 
 Cargadas via Google Fonts en `Layout.astro`.
 
-### Anti-patterns (NO hacer)
+### Anti-patterns (no hacer)
 
-- Emojis como iconos (usar Lucide SVG inline)
-- `cursor:pointer` faltante
-- Hovers que cambian layout
+- Emojis como iconos (usar SVG de Lucide en línea)
+- Falta de `cursor:pointer`
+- Hovers que cambian el layout
 - Contraste < 4.5:1
-- Cambios instantáneos (siempre transition 150-300ms)
-- Dark mode global (el proyecto es light-only, excepto "Modo Experto" en /tienda)
-- Gradientes AI purple/pink
+- Cambios instantáneos (usar siempre transiciones de 150-300ms)
+- Modo oscuro global (el proyecto es claro por defecto, excepto el "Modo Experto" en /tienda)
+- Gradientes morado/rosa típicos de IA
 - Colores neón
 
-### Modo Experto (dark mode invertido en /tienda)
+### Modo Experto (modo oscuro invertido en /tienda)
 
-Cuando activás "Modo Experto" en la tienda, el root del shop se pone dark navy (`#1F3829`) y todos los colores se invierten via CSS overrides. La implementación vive en `src/styles/global.css` líneas 33-342. Usa el attribute selector `.shop-root[data-mode="experto"]` con `!important` para ganarle a Tailwind.
+Cuando activas el "Modo Experto" en la tienda, la raíz del shop se pone en verde oscuro (`#1F3829`) y todos los colores se invierten mediante overrides de CSS. La implementación se encuentra en `src/styles/global.css` líneas 33-342. Usa el selector por atributo `.shop-root[data-mode="experto"]` con `!important` para tener precedencia sobre Tailwind.
 
 ---
 
 ## Sistema dual de puntos
 
-El proyecto implementa exactamente el sistema descrito en `ProductRequirements.md §3`. Lo resumo:
+El proyecto implementa exactamente el sistema descrito en `ProductRequirements.md §3`. A continuación el resumen:
 
 ### Dos saldos independientes
 
@@ -405,15 +405,15 @@ Documentados en detalle en `docs/ARCHITECTURE.md` y `docs/PATTERNS.md`. Resumen 
 
 ## Cómo leer el código
 
-Si querés entender el proyecto de punta a punta, este es el orden recomendado:
+Si quieres entender el proyecto de principio a fin, este es el orden recomendado:
 
 ### Día 1: lo básico
 
 1. **`package.json`** — qué dependencias hay y para qué.
-2. **`astro.config.mjs`** — config de Astro + Tailwind v4.
-3. **`tsconfig.json`** — strict mode + React JSX.
-4. **`src/styles/global.css`** — design tokens + modo experto.
-5. **`src/layouts/Layout.astro`** — HTML base, fonts, dónde se monta el cart/profile switcher.
+2. **`astro.config.mjs`** — configuración de Astro y Tailwind v4.
+3. **`tsconfig.json`** — modo estricto y JSX de React.
+4. **`src/styles/global.css`** — design tokens y modo experto.
+5. **`src/layouts/Layout.astro`** — HTML base, fuentes y dónde se monta el carrito y el selector de perfil.
 
 ### Día 2: la tienda
 
@@ -462,42 +462,44 @@ Si querés entender el proyecto de punta a punta, este es el orden recomendado:
 | Doc | Para qué |
 |---|---|
 | `AGENTS.md` | Instrucciones operativas del proyecto (comandos, identidad de marca). |
-| `design-system/MASTER.md` | Brand identity, colores, tipografía, anti-patterns. |
-| `docs/ARCHITECTURE.md` | 20 patrones de componentes Astro + React, con fuentes a docs oficiales. |
-| `docs/PATTERNS.md` | 20 patrones de datos con nanostores, con fuentes a docs oficiales. |
-| `ProductRequirements.md` | PRD completo bilingüe (ES/EN) con las 17 HUs y acceptance criteria. |
+| `design-system/MASTER.md` | Identidad de marca, colores, tipografía y anti-patrones. |
+| `docs/ARCHITECTURE.md` | 20 patrones de componentes de Astro y React, con referencias a la documentación oficial. |
+| `docs/PATTERNS.md` | 20 patrones de datos con nanostores, con referencias a la documentación oficial. |
+| `ProductRequirements.md` | PRD completo bilingüe (ES/EN) con las 17 HUs y criterios de aceptación. |
 | `BackendPlan.md` | Plan técnico para implementar el backend real (Supabase + Stripe + Vercel). |
-| `PropuestaFuncionalIconicoCafe.md` | Propuesta de negocio no-técnica (para stakeholders). |
-
----
-
-## Roadmap hacia backend real
-
-Actualmente todo es frontend con mocks. Para hacerlo real:
-
-1. **Auth:** Supabase Auth (magic link nativo, Google OAuth, sessions).
-2. **DB:** Supabase Postgres con schema de `users`, `orders`, `points_transactions`, `ranks`, `redeemable_products`, `shipping_zones`.
-3. **Pagos:** Stripe (Cards, Apple/Google Pay, SPEI, OXXO, MSI 3/6/12).
-4. **Suscripciones:** Stripe Subscriptions + Customer Portal.
-5. **Storage:** Supabase Storage para imágenes de productos.
-6. **Emails:** Resend (11 templates documentados en `/dev/emails`).
-7. **Cron jobs:** Vercel Cron (rank-downgrade, points-expiry, inactivity warnings).
-
-El plan técnico completo está en `BackendPlan.md` (14 pasos secuenciales, 4-6 semanas de desarrollo).
-
-Los docs `docs/ARCHITECTURE.md` y `docs/PATTERNS.md` ya están escritos para que la transición sea limpia: los patrones documentados aplican igual con o sin backend.
+| `PropuestaFuncionalIconicoCafe.md` | Propuesta de negocio no técnica (para stakeholders). |
 
 ---
 
 ## Resumen técnico en 1 minuto
 
-- **12 páginas Astro estáticas** (4 originales + 8 nuevas de mockups).
+- **12 páginas Astro estáticas** (4 originales y 8 nuevas de mockups).
 - **0 endpoints activos** (solo el stub `/api/contact`).
-- **3 React islands** que comparten state via `nanostores` + `localStorage`.
-- **3 perfiles mockeados** que se switchean en vivo sin refresh.
-- **17 HUs mockupeadas** con datos realistas (precios en centavos, MXN, CP mexicano, fechas).
-- **2 archivos de docs** con 40 patrones oficiales de Astro 6 + React 19 + nanostores 1.3 + Tailwind v4.
-- **1 design system** minimalista (cream/navy/charcoal, Playfair + Inter).
-- **0 dependencias de runtime adicionales** vs la base Astro + React.
+- **3 React islands** que comparten estado mediante `nanostores` y `localStorage`.
+- **3 perfiles simulados** que se alternan en vivo sin recargar.
+- **17 HUs mockeadas** con datos realistas (precios en centavos, MXN, CP mexicano, fechas).
+- **2 archivos de documentación** con 40 patrones oficiales de Astro 6, React 19, nanostores 1.3 y Tailwind v4.
+- **1 sistema de diseño** minimalista (cream/navy/charcoal, Playfair + Inter).
+- **0 dependencias de tiempo de ejecución adicionales** sobre la base de Astro + React.
 
 Stack: Astro 6.4 + React 19 + Tailwind v4 + nanostores 1.3 + Bun 1.3. Build: ~1.5s, 12 páginas, 0 errores.
+
+---
+
+## Roadmap hacia backend real
+
+Actualmente todo es frontend con datos simulados. Para llevarlo a producción:
+
+1. **Auth:** Supabase Auth (magic link nativo, Google OAuth, sesiones).
+2. **DB:** Supabase Postgres con esquema de `users`, `orders`, `points_transactions`, `ranks`, `redeemable_products`, `shipping_zones`.
+3. **Pagos:** Stripe (tarjetas, Apple/Google Pay, SPEI, OXXO, MSI 3/6/12).
+4. **Suscripciones:** Stripe Subscriptions y Customer Portal.
+5. **Almacenamiento:** Supabase Storage para imágenes de productos.
+6. **Correos:** Resend (11 plantillas documentadas en `/dev/emails`).
+7. **Tareas programadas:** Vercel Cron (baja de rango, expiración de puntos, avisos de inactividad).
+
+El plan técnico completo está en `BackendPlan.md` (14 pasos secuenciales, 4-6 semanas de desarrollo).
+
+Los documentos `docs/ARCHITECTURE.md` y `docs/PATTERNS.md` ya están escritos para que la transición sea limpia: los patrones documentados aplican igual con o sin backend.
+
+---
